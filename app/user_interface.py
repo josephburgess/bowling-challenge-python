@@ -24,3 +24,15 @@ class UserInterface:
             print(f"Invalid input. You have {remaining_pins} remaining.")
             return self.validate_roll_two(remaining_pins)
         return roll_two
+
+    def get_roll_three(self):
+        if self.game.frame_count != 10:
+            self.roll_three = 0
+            return self.roll_three
+
+        self.roll_three = (
+            int(input("Enter your bonus last roll: "))
+            if self.roll_one == 10 or self.roll_one + self.roll_two == 10
+            else 0
+        )
+        return self.roll_three
