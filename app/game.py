@@ -9,11 +9,8 @@ class Game:
         return sum(frame.get_total() for frame in self.scorecard)
 
     def calculate_spares(self):
-        spare_bonus = 0
-        for index, frame in enumerate(self.scorecard):
-            previous_frame = self.scorecard[index - 1]
-
-            if index > 0 and previous_frame.is_spare():
-                spare_bonus += frame.get_first()
-
-        return spare_bonus
+        return sum(
+            self.scorecard[index].get_first()
+            for index in range(1, len(self.scorecard))
+            if self.scorecard[index - 1].is_spare()
+        )
