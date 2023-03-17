@@ -12,6 +12,15 @@ open_frame = Mock(
     is_spare=lambda: False,
 )
 
+spare_frame = Mock(
+    get_first=lambda: 5,
+    get_second=lambda: 5,
+    get_third=lambda: 0,
+    get_total=lambda: 10,
+    is_strike=lambda: False,
+    is_spare=lambda: True,
+)
+
 
 def test_add_frame_to_scorecard():
     game = Game()
@@ -21,7 +30,14 @@ def test_add_frame_to_scorecard():
 
 def test_calculate_without_bonuses():
     game = Game()
-    num = 10
-    for _ in range(num):
+    for _ in range(10):
         game.add(open_frame)
     assert game.calculate_face_value() == 70
+
+
+def test_calculate_spare_bonuses():
+    game = Game()
+    for _ in range(5):
+        game.add(spare_frame)
+        game.add(open_frame)
+    assert game.calculate_spares() == 15
