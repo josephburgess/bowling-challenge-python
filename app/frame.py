@@ -6,3 +6,9 @@ class Frame:
 
     def get_first(self):
         return self.first
+
+    def get_second(self):
+        return self.second
+
+    def get_third(self):
+        return self.third
