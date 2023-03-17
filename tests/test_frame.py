@@ -32,3 +32,8 @@ def test_frame_get_total():
 
 def test_frame_is_strike():
     assert frame.is_strike() == True
+
+
+def test_frame_is_spare():
+    assert spare_frame.is_spare() == True
+    assert open_frame.is_spare() == False

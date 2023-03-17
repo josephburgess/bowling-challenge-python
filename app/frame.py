@@ -18,3 +18,6 @@ class Frame:
 
     def is_strike(self):
         return self.first == 10
+
+    def is_spare(self):
+        return self.first != 10 and self.first + self.second == 10
