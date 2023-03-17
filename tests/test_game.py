@@ -58,3 +58,14 @@ def test_calculate_strikes_preceding_open_frames():
         game.add(strike_frame)
         game.add(open_frame)
     assert game.calculate_strikes() == 35
+
+
+def test_calculate_strikes_following_strikes():
+    game = Game()
+    for _ in range(2):
+        game.add(strike_frame)
+        game.add(strike_frame)
+        game.add(open_frame)
+        game.add(open_frame)
+        game.add(open_frame)
+    assert game.calculate_strikes() == 40
