@@ -28,6 +28,14 @@ class TestUserInterface(unittest.TestCase):
         roll_three = self.user_interface.get_roll_three()
         assert roll_three == 2
 
+    @patch("builtins.input", side_effect=["5", "5", "2"])
+    def test_roll_three_when_not_final_frame(self, mock_input):
+        self.game.frame_count = 8
+        self.user_interface.get_roll_one()
+        self.user_interface.get_roll_two()
+        roll_three = self.user_interface.get_roll_three()
+        assert roll_three == 0
+
 
 if __name__ == "__main__":
     unittest.main()
