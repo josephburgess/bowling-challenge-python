@@ -17,21 +17,21 @@ class Game:
 
     def calculate_strikes(self):
         strike_bonus = 0
+
         for index, frame in enumerate(self.scorecard):
             if index == 0:
                 continue
 
             previous_frame = self.scorecard[index - 1]
             next_frame = (
-                self.scorecard[index + 1] if index != len(self.scorecard) - 1 else None
+                self.scorecard[index + 1] if index < len(self.scorecard) - 1 else None
             )
 
             if previous_frame.is_strike():
                 strike_bonus += frame.get_first()
 
                 if frame.is_strike() and index != 9:
-                    strike_bonus += next_frame.get_first()
-
+                    strike_bonus += next_frame.get_first() if next_frame else 0
                 else:
                     strike_bonus += frame.get_second()
 
