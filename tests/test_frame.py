@@ -34,6 +34,11 @@ def test_frame_is_strike():
     assert frame.is_strike() == True
 
 
+def test_frame_is_not_strike():
+    assert open_frame.is_strike() == False
+
+
 def test_frame_is_spare():
     assert spare_frame.is_spare() == True
+    assert frame.is_spare() == False
     assert open_frame.is_spare() == False
