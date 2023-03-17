@@ -107,3 +107,42 @@ def test_spare_final_frame():
     game.add(open_frame)
     game.add(spare_bonus_frame)
     assert game.calculate_grand_total() == 130
+
+
+def test_only_open_frames():
+    game = Game()
+    for _ in range(10):
+        game.add(open_frame)
+    assert game.calculate_grand_total() == 70
+
+
+def test_only_spare_frames():
+    game = Game()
+    for _ in range(9):
+        game.add(spare_frame)
+    game.add(spare_bonus_frame)
+    assert game.calculate_grand_total() == 150
+
+
+def test_alternating_strike_and_open_frames():
+    game = Game()
+    for _ in range(5):
+        game.add(strike_frame)
+        game.add(open_frame)
+    assert game.calculate_grand_total() == 120
+
+
+def test_alternating_spare_and_open_frames():
+    game = Game()
+    for _ in range(5):
+        game.add(spare_frame)
+        game.add(open_frame)
+    assert game.calculate_grand_total() == 100
+
+
+def test_single_strike_frame():
+    game = Game()
+    game.add(strike_frame)
+    for _ in range(9):
+        game.add(open_frame)
+    assert game.calculate_grand_total() == 80
