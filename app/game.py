@@ -1,9 +1,11 @@
 class Game:
     def __init__(self):
         self.scorecard = []
+        self.frame_count = 1
 
     def add(self, frame):
         self.scorecard.append(frame)
+        self.frame_count += 1
 
     def calculate_face_value(self):
         return sum(frame.get_total() for frame in self.scorecard)
