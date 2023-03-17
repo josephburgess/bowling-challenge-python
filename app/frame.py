@@ -15,3 +15,6 @@ class Frame:
 
     def get_total(self):
         return self.first + self.second + self.third
+
+    def is_strike(self):
+        return self.first == 10

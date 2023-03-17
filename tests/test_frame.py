@@ -28,3 +28,7 @@ def test_frame_get_total():
     assert frame.get_total() == 17
     assert open_frame.get_total() == 9
     assert spare_frame.get_total() == 10
+
+
+def test_frame_is_strike():
+    assert frame.is_strike() == True
