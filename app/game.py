@@ -36,3 +36,10 @@ class Game:
                     strike_bonus += frame.get_second()
 
         return strike_bonus
+
+    def calculate_grand_total(self):
+        return (
+            self.calculate_face_value()
+            + self.calculate_strikes()
+            + self.calculate_spares()
+        )
