@@ -12,3 +12,6 @@ class Frame:
 
     def get_third(self):
         return self.third
+
+    def get_total(self):
+        return self.first + self.second + self.third
