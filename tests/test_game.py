@@ -39,6 +39,15 @@ perfect_final_frame = Mock(
     is_spare=lambda: False,
 )
 
+spare_bonus_frame = Mock(
+    get_first=lambda: 5,
+    get_second=lambda: 5,
+    get_third=lambda: 5,
+    get_total=lambda: 15,
+    is_strke=lambda: False,
+    is_spare=lambda: True,
+)
+
 
 def test_add_frame_to_scorecard():
     game = Game()
@@ -86,3 +95,15 @@ def test_perfect_game():
         game.add(strike_frame)
     game.add(perfect_final_frame)
     assert game.calculate_grand_total() == 300
+
+
+def test_spare_final_frame():
+    game = Game()
+    for _ in range(2):
+        game.add(strike_frame)
+        game.add(strike_frame)
+        game.add(open_frame)
+        game.add(open_frame)
+    game.add(open_frame)
+    game.add(spare_bonus_frame)
+    assert game.calculate_grand_total() == 130
