@@ -17,3 +17,11 @@ def test_add_frame_to_scorecard():
     game = Game()
     game.add(open_frame)
     assert game.scorecard == [open_frame]
+
+
+def test_calculate_without_bonuses():
+    game = Game()
+    num = 10
+    for _ in range(num):
+        game.add(open_frame)
+    assert game.calculate_face_value() == 70
