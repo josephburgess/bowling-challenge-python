@@ -1,4 +1,4 @@
-from app import Game, Frame, UserInterface
+from . import Game, Frame, UserInterface
 
 
 class Application:
