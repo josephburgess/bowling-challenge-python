@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock, patch
-from app.user_interface import UserInterface
+from app import UserInterface
 
 
 class TestUserInterface(unittest.TestCase):

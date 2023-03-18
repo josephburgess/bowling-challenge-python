@@ -1,5 +1,5 @@
 import pytest
-from app.frame import Frame
+from app import Frame
 
 frame = Frame(10, 3, 4)
 open_frame = Frame(8, 1, 0)

@@ -1,5 +1,5 @@
 import pytest
-from app.game import Game
+from app import Game
 from unittest.mock import Mock
 
 
