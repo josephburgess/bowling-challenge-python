@@ -1,12 +1,11 @@
 import unittest
 from unittest.mock import Mock, patch
 from app.user_interface import UserInterface
-from app.game import Game
 
 
 class TestUserInterface(unittest.TestCase):
     def setUp(self):
-        self.game = Game()
+        self.game = Mock()
         self.user_interface = UserInterface(self.game)
 
     @patch("builtins.input", side_effect=["5"])
@@ -29,12 +28,33 @@ class TestUserInterface(unittest.TestCase):
         assert roll_three == 2
 
     @patch("builtins.input", side_effect=["5", "5", "2"])
-    def test_roll_three_when_not_final_frame(self, mock_input):
+    def test_roll_three_user_input_when_not_final_frame(self, mock_input):
         self.game.frame_count = 8
         self.user_interface.get_roll_one()
         self.user_interface.get_roll_two()
         roll_three = self.user_interface.get_roll_three()
         assert roll_three == 0
+
+    def test_get_roll_three_in_frames_1_to_9(self):
+        for i in range(1, 10):
+            self.game.frame_count = i
+            roll_three = self.user_interface.get_roll_three()
+            assert roll_three == 0
+
+    def test_get_roll_three_in_frame_10_open_frame(self):
+        self.game.frame_count = 10
+        self.user_interface.roll_one = 5
+        self.user_interface.roll_two = 4
+        roll_three = self.user_interface.get_roll_three()
+        assert roll_three == 0
+
+    @patch("builtins.input", side_effect=["10", "10", "5"])
+    def test_get_roll_three_in_frame_10_strike(self, mock_input):
+        self.game.frame_count = 10
+        self.user_interface.get_roll_one()
+        self.user_interface.get_roll_two()
+        roll_three = self.user_interface.get_roll_three()
+        assert roll_three == 5
 
 
 if __name__ == "__main__":
