@@ -20,8 +20,3 @@ class Application:
     def title_text(self):
         print("Welcome! This simple calculator will keep track of your bowling score.")
         print("Input rolls and your score will be printed at the end of the game.")
-
-
-if __name__ == "__main__":
-    app = Application()
-    app.run()
