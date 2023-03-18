@@ -56,6 +56,42 @@ class TestUserInterface(unittest.TestCase):
         roll_three = self.user_interface.get_roll_three()
         assert roll_three == 5
 
+    @patch("builtins.print")
+    @patch("builtins.input", side_effect=["a", "2"])
+    def test_validate_roll_input_alphabetic_character(self, mock_input, mock_print):
+        roll_value = self.user_interface.validate_roll_input("Enter a roll: ", 0, 10)
+        assert roll_value == 2
+        mock_print.assert_called_with(
+            "Invalid input. Please enter a number between 0 and 10."
+        )
+
+    @patch("builtins.print")
+    @patch("builtins.input", side_effect=["!", "3"])
+    def test_validate_roll_input_symbol(self, mock_input, mock_print):
+        roll_value = self.user_interface.validate_roll_input("Enter a roll: ", 0, 10)
+        assert roll_value == 3
+        mock_print.assert_called_with(
+            "Invalid input. Please enter a number between 0 and 10."
+        )
+
+    @patch("builtins.print")
+    @patch("builtins.input", side_effect=["11", "5"])
+    def test_validate_roll_input_out_of_range(self, mock_input, mock_print):
+        roll_value = self.user_interface.validate_roll_input("Enter a roll: ", 0, 10)
+        assert roll_value == 5
+        mock_print.assert_called_with(
+            "Invalid input. Please enter a number between 0 and 10."
+        )
+
+    @patch("builtins.print")
+    @patch("builtins.input", side_effect=["-1", "4"])
+    def test_validate_roll_input_negative_number(self, mock_input, mock_print):
+        roll_value = self.user_interface.validate_roll_input("Enter a roll: ", 0, 10)
+        assert roll_value == 4
+        mock_print.assert_called_with(
+            "Invalid input. Please enter a number between 0 and 10."
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
