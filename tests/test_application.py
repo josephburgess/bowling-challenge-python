@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 from app import Application
 
 
-class TestApplication(unittest.TestCase):
+class TestApplication:
     @patch("app.application.Game")
     @patch("app.application.Frame")
     def test_run(self, mock_Frame, mock_Game):
